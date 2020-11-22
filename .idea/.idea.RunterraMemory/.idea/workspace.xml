@@ -20,6 +20,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/GameResources/Scripts/SceneController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/GameResources/Scripts/FrontCard.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../GearPuzzle/Assets/GameResources/Scripts/Axis.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../GearPuzzle/Assets/GameResources/Scripts/SoundManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Astrozone/Assets/GameResources/Scripts/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Astrozone/Assets/GameResources/Scripts/Mover.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../GearPuzzle/Assets/GameResources/Scripts/GameStateController.cs" root0="SKIP_HIGHLIGHTING" />
@@ -30,10 +31,10 @@
         <option value="$PROJECT_DIR$/Assets/GameResources/Scripts/Timer.cs" />
         <option value="$PROJECT_DIR$/Assets/SceneController.cs" />
         <option value="$PROJECT_DIR$/Assets/GameResources/Scripts/Health.cs" />
-        <option value="$PROJECT_DIR$/Assets/GameResources/Scripts/SceneController.cs" />
         <option value="$PROJECT_DIR$/Assets/GameResources/Scripts/EndgameController.cs" />
         <option value="$PROJECT_DIR$/Assets/GameResources/Scripts/FrontCard.cs" />
         <option value="$PROJECT_DIR$/Assets/GameResources/Scripts/Score.cs" />
+        <option value="$PROJECT_DIR$/Assets/GameResources/Scripts/SceneController.cs" />
       </list>
     </option>
   </component>
@@ -85,7 +86,9 @@
       <option name="presentableId" value="Default" />
       <updated>1605801087864</updated>
       <workItem from="1605801093524" duration="4748000" />
-      <workItem from="1605862750248" duration="20608000" />
+      <workItem from="1605862750248" duration="20974000" />
+      <workItem from="1605947365953" duration="5229000" />
+      <workItem from="1606033457945" duration="2539000" />
     </task>
     <servers />
   </component>

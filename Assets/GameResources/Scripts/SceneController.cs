@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,20 +18,17 @@ public class SceneController : MonoBehaviour
 
     [SerializeField] private Health health;
     [SerializeField] private Score score;
-    
-    private FrontCard _firstRevealed;
-    private FrontCard _secondRevealed;
-    private FrontCard _thirdRevealed;
-    
+
     private Coroutine _checkRoutine = null;
 
-    private int successPicks = 0;
+    private int _successPicks;
+    private List<FrontCard> cards = new List<FrontCard>();
     
     private void Start()
     {
         int[] numbers = {0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4};
         numbers = RandomizeArray(numbers);
-        
+        _successPicks = 0;
         InstantiateCards(numbers);
     }
 
@@ -78,69 +76,63 @@ public class SceneController : MonoBehaviour
 
         return newArray;
     }
-
-    public bool CanReveal => (_secondRevealed == null || _thirdRevealed == null) && _checkRoutine == null;
-
+    
+   public bool CanReveal => (cards.Count <= 2) && _checkRoutine == null;
     public void CardRevealed(FrontCard card)
     {
-        if (_firstRevealed == null)
+        if (cards.Count == 0)
         {
-            _firstRevealed = card;
+            cards.Add(card);
         }
-        else if ( _secondRevealed == null)
+        else
         {
-            _secondRevealed = card;
-            _checkRoutine = StartCoroutine(CheckMatch());
-        }
-        else if (_thirdRevealed == null)
-        {
-            _thirdRevealed = card;
-            _checkRoutine = StartCoroutine(CheckMatch());
+            cards.Add(card);
+            _checkRoutine = StartCoroutine(CheckOpenedCard());
         }
     }
 
-    private IEnumerator CheckMatch()
+    private IEnumerator CheckOpenedCard()
     {
-        if (_firstRevealed.CardID == _secondRevealed.CardID)
+        if (cards[cards.Count - 1].CardID == cards[cards.Count - 2].CardID)
         {
-            score.AddScore(health.HealthCount);
+            score.AddScore(cards.Count == 2 ? health.HealthCount : 3 * health.HealthCount);
+            if (cards.Count == 3)
+            {
+                _successPicks += 3;
+                if (_successPicks == gridRows * gridCols)
+                    OnWin?.Invoke();
+                RemoveCardsFromField();
+                ClearVariables();
+            }
         }
         else
         {
             yield return new WaitForSeconds(0.5f);
-            StartCoroutine(_firstRevealed.FlipToBack());
-            StartCoroutine( _secondRevealed.FlipToBack());
+            FlipCardsToBack();
             health.TakeLife();
-            _firstRevealed = null;
-            _secondRevealed = null;
-            _checkRoutine = null;
+            ClearVariables();
         }
-
-        if (_thirdRevealed != null)
+    }
+    
+    private void FlipCardsToBack()
+    {
+        foreach (FrontCard card in cards)
         {
-            if (_secondRevealed.CardID == _thirdRevealed.CardID)
-            {
-                score.AddScore(3 * health.HealthCount);
-                successPicks += 3;
-                Debug.Log("Success pick: " + successPicks);
-                if (successPicks == gridRows * gridCols)
-                    OnWin?.Invoke();
-                _firstRevealed.DeleteCard();
-                _secondRevealed.DeleteCard();
-                _thirdRevealed.DeleteCard();
-            }
-            else
-            {
-                yield return new WaitForSeconds(0.5f);
-                StartCoroutine(_firstRevealed.FlipToBack());
-                StartCoroutine( _secondRevealed.FlipToBack());
-                StartCoroutine( _thirdRevealed.FlipToBack());
-                health.TakeLife();
-                _checkRoutine = null;
-            }
-            _firstRevealed = null;
-            _secondRevealed = null;
-            _thirdRevealed = null;
+            StartCoroutine(card.FlipToBack());
+        }
+    }
+    
+    private void ClearVariables()
+    {
+        _checkRoutine = null;
+        cards.Clear();
+    }
+    
+    private void RemoveCardsFromField()
+    {
+        foreach (FrontCard card in cards)
+        {
+            card.DeleteCard();
         }
     }
 }

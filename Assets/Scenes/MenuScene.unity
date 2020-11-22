@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 173067627}
   - component: {fileID: 173067626}
   - component: {fileID: 173067625}
+  - component: {fileID: 173067628}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -350,6 +351,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173067623}
   m_CullTransparentMesh: 0
+--- !u!95 &173067628
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173067623}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e3fd2e5d4f434ae4cb6282491eefd6b8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &292578824
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,6 +475,7 @@ MonoBehaviour:
   scoreTexts: []
   highScoreTexts:
   - {fileID: 563273210}
+  newRecord: {fileID: 0}
 --- !u!4 &488294612
 Transform:
   m_ObjectHideFlags: 0
